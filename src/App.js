@@ -24,7 +24,11 @@ function App() {
           element: <People></People>,
         },
         {
-          path:"people/user/:userID", element: <UserDetails></UserDetails>
+          path:"people/user/:userID", 
+          loader: async ({params})=>{
+            return fetch(`https://jsonplaceholder.typicode.com/users/${params.userID}`)
+          },
+          element: <UserDetails></UserDetails>
         }
       ],
     },
