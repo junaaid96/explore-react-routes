@@ -1,23 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Main from "./Components/Layout/Main";
+import "./App.css";
+import About from "./Components/About/About";
+import Home from "./Components/Home/Home";
+import Products from "./Components/Products/Products";
+import People from "./Components/People/People";
+import UserDetails from "./Components/UserDetails/UserDetails";
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Main></Main>,
+      children: [
+        { path: "/home", element: <Home></Home> },
+        { path: "/about", element: <About></About> },
+        { path: "/products", element: <Products></Products> },
+        {
+          path: "/people",
+          loader: async () => {
+            return fetch("https://jsonplaceholder.typicode.com/users");
+          },
+          element: <People></People>,
+        },
+        {
+          path:'/people/:userID', element: <UserDetails></UserDetails>
+        }
+      ],
+    },
+    //not found custom warning component
+    {
+      path: "*",
+      element: <div>Apnar bhul hoyeche. Dekheshone click korun.</div>,
+    },
+  ]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <RouterProvider router={router}></RouterProvider>
     </div>
   );
 }
