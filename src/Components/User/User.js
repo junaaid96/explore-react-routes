@@ -8,7 +8,7 @@ const User = ({user}) => {
             <h2>Name: {name}</h2>
             <p>Email: {email}</p>
             <p>City: {address.city}</p>
-            <p>username: <Link to={`people/${id}`}>{username}</Link></p>
+            <p>username: <Link to={`user/${id}`}>{username}</Link></p>
         </div>
     );
 };

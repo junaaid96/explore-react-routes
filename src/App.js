@@ -24,7 +24,7 @@ function App() {
           element: <People></People>,
         },
         {
-          path:'/people/:userID', element: <UserDetails></UserDetails>
+          path:"people/user/:userID", element: <UserDetails></UserDetails>
         }
       ],
     },
